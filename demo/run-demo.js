@@ -61,7 +61,7 @@ jobs:
 ✅ PASS: Output compliant with CodeForge RULES.md.
 `;
 
-// ── Model Selection & Mock Logic ─────────────────────────────────────────────
+// ── Model Selection Logic ───────────────────────────────────────────────────
 async function simulateStream(text) {
   const parts = text.split(" ");
   for (const part of parts) {
@@ -71,9 +71,15 @@ async function simulateStream(text) {
 }
 
 function resolveModel() {
+  // FORCE MOCK MODE with --mock flag
+  if (process.argv.includes('--mock')) {
+    return "MOCK";
+  }
+
   if (process.env.GEMINI_API_KEY) return "google:gemini-2.0-flash";
   if (process.env.ANTHROPIC_API_KEY) return "anthropic:claude-sonnet-4-5-20250929";
   if (process.env.OPENAI_API_KEY) return "openai:gpt-4o";
+
   return "MOCK";
 }
 
@@ -82,7 +88,7 @@ async function run() {
   console.log("🔨 Starting CodeForge AI DevOps Architect...");
 
   if (model === "MOCK") {
-    console.log("⚠️  NO API KEY DETECTED: Running in Simulation Mode for Demo Video...\n");
+    console.log("⚠️  SIMULATION MODE: Running mock generation for demo video...\n");
     await simulateStream(MOCK_OUTPUT);
   } else {
     console.log(`🔑 Using Provider: ${model}\n`);
