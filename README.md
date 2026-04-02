@@ -71,6 +71,9 @@ export GEMINI_API_KEY=AIza...         # Gemini 2.5 Pro
 
 # Run the demo
 node demo/run-demo.js
+
+### 🎥 Simulation Mode (For Demo Videos)
+If no API keys are found in the environment, the script automatically enters **Simulation Mode**. This streams a high-quality, pre-defined infrastructure generation to your terminal, allowing you to record a perfect demo video without needing an active LLM subscription.
 ```
 
 ### Validate the agent structure
