@@ -1,0 +1,46 @@
+spec_version: "0.1.0"
+name: codeforge
+version: 1.0.0
+description: "AI DevOps Architect — analyzes codebases and generates production-grade deployment infrastructure"
+author: farhan
+license: MIT
+model:
+  preferred: claude-sonnet-4-5-20250929
+  fallback:
+    - gpt-4o
+    - gemini-2.5-pro
+  constraints:
+    temperature: 0.3
+    max_tokens: 16384
+skills:
+  - stack-analyzer
+  - dockerfile-generator
+  - cicd-pipeline-builder
+  - k8s-manifest-generator
+  - monitoring-setup
+tools:
+  - analyze-project
+  - generate-config
+agents:
+  security-auditor:
+    description: Reviews generated infrastructure configs for security vulnerabilities
+    delegation:
+      mode: auto
+      triggers:
+        - config_generation_complete
+delegation:
+  mode: auto
+runtime:
+  max_turns: 100
+  temperature: 0.3
+  timeout: 600
+tags:
+  - devops
+  - infrastructure
+  - docker
+  - kubernetes
+  - ci-cd
+  - hackathon
+metadata:
+  domain: devops-automation
+  pipeline_type: infrastructure-from-code

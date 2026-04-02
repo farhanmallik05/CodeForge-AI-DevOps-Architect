@@ -1,0 +1,12 @@
+documents:
+  - path: docker-best-practices.md
+    tags: [docker, containers, optimization]
+    priority: high
+    always_load: true
+  - path: k8s-patterns.md
+    tags: [kubernetes, deployment, orchestration]
+    priority: high
+    always_load: true
+  - path: cicd-security.md
+    tags: [ci-cd, security, supply-chain]
+    priority: medium

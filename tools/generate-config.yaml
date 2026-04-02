@@ -1,0 +1,20 @@
+name: generate-config
+description: "Write generated configuration files to the project directory"
+version: 1.0.0
+input_schema:
+  type: object
+  properties:
+    target_directory:
+      type: string
+      description: "Output directory for generated files"
+    files:
+      type: array
+      items:
+        type: object
+        properties:
+          path: { type: string }
+          content: { type: string }
+  required: [target_directory, files]
+annotations:
+  requires_confirmation: true
+  read_only: false

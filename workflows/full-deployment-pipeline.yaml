@@ -1,0 +1,40 @@
+name: full-deployment-pipeline
+description: "Complete infrastructure generation pipeline — from code analysis to production-ready deployment"
+version: 1.0.0
+inputs:
+  - name: project_directory
+    type: string
+    required: true
+  - name: deploy_target
+    type: string
+    default: kubernetes
+    enum: [kubernetes, docker-compose, cloud-run]
+steps:
+  - id: analyze
+    action: "Analyze project technology stack"
+    skill: stack-analyzer
+    outputs: [stack_profile]
+  - id: containerize
+    action: "Generate Dockerfile and .dockerignore"
+    depends_on: [analyze]
+    skill: dockerfile-generator
+    inputs:
+      stack: ${{ steps.analyze.outputs.stack_profile }}
+  - id: pipeline
+    action: "Generate CI/CD pipeline configuration"
+    depends_on: [containerize]
+    skill: cicd-pipeline-builder
+  - id: orchestrate
+    action: "Generate Kubernetes manifests"
+    depends_on: [containerize]
+    skill: k8s-manifest-generator
+    conditions:
+      - ${{ inputs.deploy_target == 'kubernetes' }}
+  - id: monitor
+    action: "Generate monitoring and observability configs"
+    depends_on: [orchestrate]
+    skill: monitoring-setup
+  - id: audit
+    action: "Security audit all generated configurations"
+    depends_on: [containerize, pipeline, orchestrate, monitor]
+    agent: security-auditor

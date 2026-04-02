@@ -1,0 +1,23 @@
+name: analyze-project
+description: "Scan a project directory to detect technology stack, dependencies, and configuration files"
+version: 1.0.0
+input_schema:
+  type: object
+  properties:
+    directory:
+      type: string
+      description: "Path to project root directory"
+    depth:
+      type: integer
+      description: "Maximum directory traversal depth"
+      default: 5
+  required: [directory]
+output_schema:
+  type: object
+  properties:
+    stack_profile: { type: object }
+    files_analyzed: { type: integer }
+    confidence: { type: number }
+annotations:
+  requires_confirmation: false
+  read_only: true

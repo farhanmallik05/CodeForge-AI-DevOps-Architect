@@ -1,0 +1,7 @@
+hooks:
+  on_session_start:
+    - script: scripts/validate-yaml-output.js
+      description: "Initialize YAML validation engine"
+  post_response:
+    - script: scripts/validate-yaml-output.js
+      description: "Validate all YAML/Dockerfile outputs are syntactically correct"

@@ -1,0 +1,9 @@
+{
+  "name": "codeforge",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "gitclaw": "latest",
+    "js-yaml": "^4.1.1"
+  }
+}
