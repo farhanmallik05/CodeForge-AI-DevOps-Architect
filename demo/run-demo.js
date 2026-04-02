@@ -11,6 +11,10 @@ import { query } from "gitclaw";
 // ─────────────────────────────────────────────────────────────────────────────
 
 function resolveModel() {
+  if (process.env.GEMINI_API_KEY) {
+    console.log("🔑 Using Google Gemini (gemini-2.0-flash)");
+    return "google:gemini-2.0-flash";
+  }
   if (process.env.ANTHROPIC_API_KEY) {
     console.log("🔑 Using Anthropic Claude (claude-sonnet-4-5-20250929)");
     return "anthropic:claude-sonnet-4-5-20250929";
@@ -18,10 +22,6 @@ function resolveModel() {
   if (process.env.OPENAI_API_KEY) {
     console.log("🔑 Using OpenAI GPT-4o");
     return "openai:gpt-4o";
-  }
-  if (process.env.GEMINI_API_KEY) {
-    console.log("🔑 Using Google Gemini (gemini-2.5-pro)");
-    return "google:gemini-2.5-pro";
   }
 
   console.error(
