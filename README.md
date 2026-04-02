@@ -61,10 +61,13 @@ CodeForge is an AI agent that lives in your git repository and acts as your dedi
 # Install dependencies
 npm install
 
-# Set your API key
-export ANTHROPIC_API_KEY=sk-ant-...
+# Set ONE API key — the script auto-detects which provider to use:
+
+export ANTHROPIC_API_KEY=sk-ant-...   # Claude (recommended)
 # or
-export OPENAI_API_KEY=sk-...
+export OPENAI_API_KEY=sk-...          # GPT-4o
+# or
+export GEMINI_API_KEY=AIza...         # Gemini 2.5 Pro
 
 # Run the demo
 node demo/run-demo.js
